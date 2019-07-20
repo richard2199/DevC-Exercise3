@@ -10,7 +10,8 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-      <script src="./dist/js/API_people.js"></script>
+      <!-- <script src="./dist/js/API_people.js"></script> -->
+    
     </head>
 
     <body>
@@ -52,7 +53,8 @@
       <!--JavaScript at end of body for optimized loading-->
       <script type="text/javascript" src="./dist/js/materialize.min.js"></script>
 
-      <script>
+
+<!--       <script>
         people.results.forEach(function(e){
           var data =`<tr class="tableData">
                       <td class="td_style">${e.name}</td>
@@ -69,10 +71,43 @@
 
           document.querySelector("#target").insertAdjacentHTML('beforeend',data)
         });
+      </script> -->
+
+<!-- GET DATA API -->
+      <script>
+        let xhr = new XMLHttpRequest;
+        xhr.open('GET', 'https://swapi.co/api/people', true)
+        
+        //call the onload 
+        xhr.onload = function() {
+              //return server response as an object with JSON.parse
+              var data = JSON.parse(this.responseText);
+
+              data.results.forEach(function(e){
+                var dataPeople =`<tr class="tableData">
+                                  <td class="td_style">${e.name}</td>
+                                  <td class="td_style">${e.height}</td>
+                                  <td class="td_style">${e.mass}</td>
+                                  <td class="td_style">${e.hair_color}</td>
+                                  <td class="td_style">${e.skin_color}</td>
+                                  <td class="td_style">${e.eye_color}</td>
+                                  <td class="td_style">${e.birth_year}</td>
+                                  <td class="td_style">${e.gender}</td>
+                                  <td class="td_style">${e.homeworld}</td>
+                                  <td class="td_style">${e.films[0]}</td>
+                                </tr>`
+
+              document.querySelector("#target").insertAdjacentHTML('beforeend',dataPeople)
+            });
+            
+        }
+        //call send
+        xhr.send();
       </script>
+<!-- END GET DATA API -->
 
       <!-- Script Search -->
-      <script>
+      <!-- <script>
         $(document).ready(function($){
 
             $('.tableData').each(function(){
@@ -90,7 +125,7 @@
             });
 
         });
-      </script>
+      </script> -->
 
     </body>
   </html>
