@@ -1,11 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Exercise 3</title>
-</head>
-<body>
-    <center>
-        <h1>Daftar Planet</h1>
-    </center>
-</body>
-</html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="./dist/css/materialize.min.css"  media="screen,projection"/>
+      <!-- Style CSS -->
+      <link rel="stylesheet" href="./dist/css/style.css">
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <script src="./dist/js/API_people.js"></script>
+    </head>
+
+    <body>
+      
+      <div class="container">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="search" type="text" class="validate">
+              <label for="search">Search</label>
+              <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
+            </div>
+          </div>
+        </form>
+      </div>
+    
+      <table class="t-style bordered highlight centered responsive-table" style="width: 1300px; margin: 0 auto;">
+        <thead id="t-head">
+          <tr>
+            <th>Name</th>
+            <th>Height</th>
+            <th>Mass</th>
+            <th>Hair Color</th>
+            <th>Skin Color</th>
+            <th>Eye Color</th>
+            <th>Birth Year</th>
+            <th>Gender</th>
+            <th>Homeworld</th>
+            <th>Film</th>
+          </tr>
+        </thead>
+        <tbody id="target">
+        </tbody>
+      </table>
+
+
+
+      <script type="text/javascript" src="./dist/js/jquery-3.3.1.min.js"></script>
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="./dist/js/materialize.min.js"></script>
+
+      <script>
+        people.results.forEach(function(e){
+          var data =`<tr class="tableData">
+                      <td class="td_style">${e.name}</td>
+                      <td class="td_style">${e.height}</td>
+                      <td class="td_style">${e.mass}</td>
+                      <td class="td_style">${e.hair_color}</td>
+                      <td class="td_style">${e.skin_color}</td>
+                      <td class="td_style">${e.eye_color}</td>
+                      <td class="td_style">${e.birth_year}</td>
+                      <td class="td_style">${e.gender}</td>
+                      <td class="td_style">${e.homeworld}</td>
+                      <td class="td_style">${e.films[0]}</td>
+                    </tr>`
+
+          document.querySelector("#target").insertAdjacentHTML('beforeend',data)
+        });
+      </script>
+
+      <!-- Script Search -->
+      <script>
+        $(document).ready(function($){
+
+            $('.tableData').each(function(){
+                $(this).attr('searchData', $(this).text().toLowerCase());
+            });
+            $('#search').on('keyup', function(){
+            var dataList = $(this).val().toLowerCase();
+                $('.tableData').each(function(){
+                    if ($(this).filter('[searchData *= ' + dataList + ']').length > 0 || dataList.length < 1) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+
+        });
+      </script>
+
+    </body>
+  </html>

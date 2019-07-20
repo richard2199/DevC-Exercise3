@@ -1,0 +1,15 @@
+.t_style {
+	border: 4px solid rgba(38, 166, 154, 0.3);
+	border-radius: 5px 5px 5px 5px;
+}
+
+#t-head {
+	background-color: rgb(38, 166, 154);
+}
+
+.tableData:nth-child(even) {
+	background-color: rgba(38, 166, 154, 0.7);
+}
+.tableData:hover:nth-child(odd) {
+	background-color: rgba(38, 166, 154, 0.7);
+}
